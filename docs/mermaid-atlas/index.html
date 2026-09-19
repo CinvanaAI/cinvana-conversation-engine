@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conversation Engine Diagram Atlas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <header>
+        <p class="eyebrow">Conversation Engine</p>
+        <h1>Diagram Atlas</h1>
+      </header>
+      <label class="search">
+        <span class="sr-only">Search diagrams</span>
+        <input id="search" type="search" placeholder="Search diagrams">
+      </label>
+      <div id="categories" class="categories"></div>
+      <nav id="list" aria-label="Diagrams"></nav>
+    </aside>
+    <main>
+      <div class="toolbar">
+        <button id="previous" class="icon" aria-label="Previous diagram" title="Previous diagram">&#8592;</button>
+        <button id="next" class="icon" aria-label="Next diagram" title="Next diagram">&#8594;</button>
+        <div class="heading">
+          <p id="category" class="eyebrow"></p>
+          <h2 id="title"></h2>
+        </div>
+        <span id="position"></span>
+        <button id="source-toggle" class="source-toggle" aria-pressed="false">Source</button>
+      </div>
+      <section class="stage">
+        <div id="loading">Rendering diagram...</div>
+        <div id="diagram" class="diagram"></div>
+        <pre id="source" hidden></pre>
+        <div id="error" class="error" hidden></div>
+      </section>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

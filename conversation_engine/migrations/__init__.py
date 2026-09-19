@@ -1,0 +1,1 @@
+"""Ordered immutable SQL migrations."""

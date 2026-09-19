@@ -1,0 +1,20 @@
+{
+  "mode": "Synthetic worker replies; actual engine intake and validation",
+  "source": "Morgan will review the fixture.",
+  "public_message": "Morgan will review the fixture.",
+  "short_private_version": "Review the fixture.",
+  "completed_stages": {
+    "mapping": "mapping",
+    "public_safety": "redactions",
+    "original_versions": "versions",
+    "public_versions": "result_pointer",
+    "discord_original": "source_pointer",
+    "discord_public": "result_pointer"
+  },
+  "worker_replies": [
+    "original_versions",
+    "mapping",
+    "public_safety"
+  ],
+  "live_model_calls": 0
+}

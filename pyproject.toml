@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "conversation-engine"
+version = "0.1.0"
+description = "Local database-native conversational transformation engine"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+conversation-engine = "conversation_engine.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["conversation_engine*"]
+
+[tool.setuptools.package-data]
+conversation_engine = ["migrations/*.sql", "seed/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

@@ -1,0 +1,25 @@
+# The runtime map is documented in Git, but all live content remains private.
+Runtime/**
+!Runtime/**/
+!Runtime/**/.gitkeep
+!Runtime/README.md
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+wheelhouse/
+
+# Local first-use results
+output/
+.env
+__pycache__/
+*.egg-info/
+build/
+dist/
