@@ -12,9 +12,61 @@
     "discord_public": "result_pointer"
   },
   "worker_replies": [
+    "public_safety",
     "original_versions",
-    "mapping",
-    "public_safety"
+    "mapping"
   ],
+  "worker_exchanges": [
+    {
+      "stage": "public_safety",
+      "source_text": "Morgan will review the fixture.",
+      "input_files": [
+        "instructions.md",
+        "message.txt",
+        "request.json"
+      ],
+      "returned_files": {
+        "response.json": "{\"decision\": \"Public\", \"redactions\": []}"
+      }
+    },
+    {
+      "stage": "original_versions",
+      "source_text": "Morgan will review the fixture.",
+      "input_files": [
+        "instructions.md",
+        "message.txt",
+        "request.json"
+      ],
+      "returned_files": {
+        "version_1.txt": "Review the fixture."
+      }
+    },
+    {
+      "stage": "mapping",
+      "source_text": "Morgan will review the fixture.",
+      "input_files": [
+        "instructions.md",
+        "mapping_context.md",
+        "mapping_reference.json",
+        "message.txt",
+        "request.json"
+      ],
+      "returned_files": {
+        "response.json": "{\"discord_public_indexing\": [\"Workshop\"]}"
+      }
+    }
+  ],
+  "input_envelope": {
+    "chat": {
+      "chat_id": "synthetic-workshop",
+      "destination_rel_path": "Archived/synthetic-workshop",
+      "position": 1
+    },
+    "message": {
+      "speaker": "User",
+      "timestamp": "2026-01-01T12:00:00+00:00",
+      "text": "Morgan will review the fixture."
+    }
+  },
   "live_model_calls": 0
 }

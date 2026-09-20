@@ -15,7 +15,7 @@ python -m examples.offline_demo
 
 **Result:** All six stages acquire current results; level 9 resolves to “Review the fixture.” The demo creates and removes its own disposable vault.
 
-See [the captured example](examples/RESULT.md) for the observed output and reproduction command.
+Read [the complete synthetic worker exchange](examples/result.json): input envelope, materialized input filenames, exact returned files and resolved outputs. [The guided path](docs/WALKTHROUGH.md) connects that run to the contracts.
 
 ## How it works
 
@@ -32,3 +32,11 @@ For your own vault, run `conversation-engine --root YOUR_VAULT init`, inspect `v
 The engine does not supply a semantic model. The demo supplies labeled fixture replies; real operation needs a feeder, an approved mapping definition and a worker that returns the documented files. New vault intake begins paused. Use a short runtime root on Windows.
 
 Owned code is available under the [MIT license](LICENSE.md).
+
+## Present edition
+
+This is a local transformation-engine snapshot with an executable, synthetic end-to-end workflow. It preserves the source, versioned definitions and captured contracts; it does not provide the semantic worker. A `Public` fixture decision demonstrates how the engine accepts a correctly formed response, not that the message was independently evaluated for disclosure.
+
+Start with [the worked flow](docs/WALKTHROUGH.md), then [stage contracts](docs/stage_contracts.md) and [operations](docs/operations.md). The existing [architecture](docs/architecture.md) is the detailed source map. [Origin](ORIGIN.md) identifies the snapshot; the expanded fixture trace is public continuation documentation, not recovered historical execution.
+
+[ChatGPT Export Archive](https://github.com/CinvanaAI/chatgpt-export-to-conversation-engine) prepares optional intake envelopes. [Conversation Archive for Discord](https://github.com/CinvanaAI/cinvana-discord-engine) is a separate consumer. Feeders, workers and consumers remain outside this engine. Real-worker evaluation, deployment and migration each require their own evidence; they are not implied by the offline run.

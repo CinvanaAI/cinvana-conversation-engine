@@ -1,36 +1,5 @@
-# Recorded first use
+# Recorded synthetic workflow
 
-This output was produced by the included example with network connections disabled. Synthetic provider or worker replies are identified by the example; no real model quality or billing is implied.
+Run `python -m examples.offline_demo` from the installed checkout.
 
-From the installed checkout:
-
-```sh
-python -m examples.offline_demo
-```
-
-[Complete recorded output](result.json)
-
-```text
-{
-  "mode": "Synthetic worker replies; actual engine intake and validation",
-  "source": "Morgan will review the fixture.",
-  "public_message": "Morgan will review the fixture.",
-  "short_private_version": "Review the fixture.",
-  "completed_stages": {
-    "mapping": "mapping",
-    "public_safety": "redactions",
-    "original_versions": "versions",
-    "public_versions": "result_pointer",
-    "discord_original": "source_pointer",
-    "discord_public": "result_pointer"
-  },
-  "worker_replies": [
-    "original_versions",
-    "mapping",
-    "public_safety"
-  ],
-  "live_model_calls": 0
-}
-```
-
-Generated timestamps and synthetic identifiers can change between runs. The demonstrated behavior and input fixture remain inspectable in the adjacent example files.
+[Complete captured output](result.json) comes from executing the adjacent synthetic example on 2026-09-20. The example uses disposable local state and makes no Discord or model calls. Timestamps or generated local identities may differ on another run. The README explains which part of the workflow this proves and which integration remains outside it.

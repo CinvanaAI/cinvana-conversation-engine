@@ -18,7 +18,7 @@ def demonstrate(root):
     text='Morgan will review the fixture.'
     envelope={'chat':{'chat_id':'synthetic-workshop','destination_rel_path':'Archived/synthetic-workshop','position':1},'message':{'speaker':'User','timestamp':'2026-01-01T12:00:00+00:00','text':text}}
     source=paths.unprocessed/'source.json';source.parent.mkdir(parents=True,exist_ok=True);source.write_text(json.dumps(envelope),encoding='utf-8')
-    accepted=service.intake.accept(load_candidate(source));returned=[]
+    accepted=service.intake.accept(load_candidate(source));returned=[];exchanges=[]
     for _ in range(8):
         service.run_once()
         rows=connection.execute("SELECT workspace_id FROM workspaces WHERE state='published'").fetchall()
@@ -29,10 +29,15 @@ def demonstrate(root):
             elif stage=='public_safety':(todo/'response.json').write_text(json.dumps({'decision':'Public','redactions':[]}),encoding='utf-8')
             elif stage in {'original_versions','public_versions'}:(todo/'version_1.txt').write_text('Review the fixture.',encoding='utf-8')
             else:raise RuntimeError('Unexpected synthetic workspace stage: '+stage)
+            response_files = {p.name: p.read_text(encoding='utf-8') for p in sorted(todo.iterdir())
+                if p.name == 'response.json' or (p.name.startswith('version_') and p.suffix == '.txt')}
+            exchanges.append({'stage': stage, 'source_text': (todo/'message.txt').read_text(encoding='utf-8'),
+                'input_files': sorted(p.name for p in todo.iterdir() if p.is_file() and p.name not in response_files),
+                'returned_files': response_files})
             # Both resolved targets are inside this newly created disposable root.
             assert todo.resolve().is_relative_to(Path(root).resolve()) and done.resolve().is_relative_to(Path(root).resolve())
             shutil.move(str(todo),str(done));returned.append(stage)
-    result={'mode':'Synthetic worker replies; actual engine intake and validation','source':text,'public_message':repo.resolve_message_text(accepted.message_id,audience='public')['message'],'short_private_version':repo.resolve_message_text(accepted.message_id,audience='private',version=9)['message'],'completed_stages':{stage:repo.current_result(accepted.message_id,stage)['output']['kind'] if 'kind' in repo.current_result(accepted.message_id,stage)['output'] else 'mapping' for stage in STAGES},'worker_replies':returned,'live_model_calls':0}
+    result={'mode':'Synthetic worker replies; actual engine intake and validation','source':text,'public_message':repo.resolve_message_text(accepted.message_id,audience='public')['message'],'short_private_version':repo.resolve_message_text(accepted.message_id,audience='private',version=9)['message'],'completed_stages':{stage:repo.current_result(accepted.message_id,stage)['output']['kind'] if 'kind' in repo.current_result(accepted.message_id,stage)['output'] else 'mapping' for stage in STAGES},'worker_replies':returned,'worker_exchanges':exchanges,'input_envelope':envelope,'live_model_calls':0}
     connection.close();return result
 
 
